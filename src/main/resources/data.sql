@@ -1,0 +1,1 @@
+INSERT INTO pizza (name, description) VALUES ('pepperoni', 'tasty');
