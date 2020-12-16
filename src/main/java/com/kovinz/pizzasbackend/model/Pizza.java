@@ -1,5 +1,7 @@
 package com.kovinz.pizzasbackend.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.kovinz.pizzasbackend.serializer.SizeSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,5 +29,12 @@ public class Pizza {
             inverseJoinColumns = @JoinColumn(name = "type_id")
     )
     private Set<Type> types;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "pizza_size",
+            joinColumns = @JoinColumn(name = "pizza_id"),
+            inverseJoinColumns = @JoinColumn(name = "size_id")
+    )
+    @JsonSerialize(using = SizeSerializer.class)
+    private Set<Size> sizes;
 
 }
